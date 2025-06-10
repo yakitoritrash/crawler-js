@@ -10,8 +10,24 @@ test('normalizeURL strip protocol', () => {
 })
 
 
-test('normalizeURL strip protocol + lowercase', () => {
+test('normalizeURL strip trailing /', () => {
   const input = 'https://Example.com/path/'
+  const actual = normalizeURL(input)
+  const expected = 'example.com/path'
+  expect(actual).toEqual(expected)
+})
+
+
+test('normalizeURL capitals', () => {
+  const input = 'https://EXAMple.com/path'
+  const actual = normalizeURL(input)
+  const expected = 'example.com/path'
+  expect(actual).toEqual(expected)
+})
+
+
+test('normalizeURL different protocol', () => {
+  const input = 'http://example.com/path'
   const actual = normalizeURL(input)
   const expected = 'example.com/path'
   expect(actual).toEqual(expected)
