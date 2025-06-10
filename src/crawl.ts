@@ -14,7 +14,8 @@ export function getURLsFromHTML(html: string, baseURL: string): string[] {
   const dom = new JSDOM(html);
   const linkElements = dom.window.document.querySelectorAll('a');
   for (const linkElement of linkElements) {
-    console.log(linkElement.href)
+    const url = new URL(linkElement.href, baseURL).href;
+    urls.push(url);
   }
   return urls;
 }
