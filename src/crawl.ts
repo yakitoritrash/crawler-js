@@ -12,7 +12,7 @@ export function normalizeURL(urlString: string): string {
 export function getURLsFromHTML(html: string, baseURL: string): string[] {
   const urls: string[] = [];
   const dom = new JSDOM(html);
-  const linkElements = dom.window.document.querySelectorAll('a')
+  const linkElements = dom.window.document.querySelectorAll('a');
   for (const linkElement of linkElements) {
     console.log(linkElement.href)
   }
