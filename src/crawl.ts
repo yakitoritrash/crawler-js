@@ -1,3 +1,4 @@
-export default function normalizeURL(urlString: String): String {
-  return urlString;
+export default function normalizeURL(urlString: string): string {
+  const urlObj = new URL(urlString);
+  return `${urlObj.hostname}${urlObj.pathname}`;
 }
