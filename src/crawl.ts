@@ -16,13 +16,14 @@ export function getURLsFromHTML(html: string, baseURL: string): string[] {
   for (const linkElement of linkElements) {
     const href = linkElement.getAttribute('href');
     if (!href) continue;
-
-    if (href.startsWith('/')) {
+    if (href.startsWith('/') || href.startsWith('https:') || href.startsWith('http://')) {
       try {
         const url = new URL(href, baseURL);
         urls.push(url.href);
-      } catch {
-
+      } catch (err) {
+        if (err instanceof Error) {
+        console.log(`error with relative url: ${err.message}`)
+        }
       }
     }
   }
