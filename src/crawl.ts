@@ -3,9 +3,14 @@ import { JSDOM } from 'jsdom'
 export async function crawlPage(currentURL: string) {
   console.log(`actively crawling: ${currentURL}`)
 
-  const resp = await fetch(currentURL);
-
-  console.log(await resp.text());
+  try {
+    const resp = await fetch(currentURL);
+    console.log(await resp.text());
+  } catch(err) {
+    if (err instanceof Error) {
+       console.log(`error in fetch: ${err.message}, on page: ${currentURL}`)
+    }
+  }
 }
 
 export function normalizeURL(urlString: string): string {
