@@ -5,6 +5,10 @@ export async function crawlPage(currentURL: string) {
 
   try {
     const resp = await fetch(currentURL);
+    if (resp.status > 399) {
+      console.log(`error in fetch with status code: ${resp.status} on page ${currentURL}`)
+      return;
+    }
     console.log(await resp.text());
   } catch(err) {
     if (err instanceof Error) {
