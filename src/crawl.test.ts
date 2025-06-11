@@ -34,11 +34,11 @@ test('normalizeURL different protocol', () => {
 })
 
 
-test('getURLsFromHTML', () => {
+test('getURLsFromHTML absolute', () => {
   const inputHTML = `
   <html>
     <body>
-      <a href "https://example.com/">
+      <a href = "https://example.com/">
         Hello
       </a>
     </body>
@@ -47,5 +47,59 @@ test('getURLsFromHTML', () => {
   const inputbaseURL = "https://example.com"
   const actual = getURLsFromHTML(inputHTML, inputbaseURL)
   const expected = ["https://example.com/"]
+  expect(actual).toEqual(expected)
+})
+
+
+test('getURLsFromHTML relative', () => {
+  const inputHTML = `
+  <html>
+    <body>
+      <a href = "/path/">
+        Hello
+      </a>
+    </body>
+  </html>
+  `
+  const inputbaseURL = "https://example.com"
+  const actual = getURLsFromHTML(inputHTML, inputbaseURL)
+  const expected = ["https://example.com/path/"]
+  expect(actual).toEqual(expected)
+})
+
+
+test('getURLsFromHTML both', () => {
+  const inputHTML = `
+  <html>
+    <body>
+      <a href = "https://example.com/path1/">
+        Hello
+      </a>
+      <a href = "/path2/">
+        Hello
+      </a>
+    </body>
+  </html>
+  `
+  const inputbaseURL = "https://example.com"
+  const actual = getURLsFromHTML(inputHTML, inputbaseURL)
+  const expected = ["https://example.com/path1/", "https://example.com/path2/"]
+  expect(actual).toEqual(expected)
+})
+
+
+test('getURLsFromHTML invalid', () => {
+  const inputHTML = `
+  <html>
+    <body>
+      <a href = "invalid">
+        Hello
+      </a>
+    </body>
+  </html>
+  `
+  const inputbaseURL = "https://example.com"
+  const actual = getURLsFromHTML(inputHTML, inputbaseURL)
+  const expected: string[] = []
   expect(actual).toEqual(expected)
 })
