@@ -15,7 +15,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "tsx ./src/crawl.ts",
+    "start": "tsx ./src/index.ts",
     "test": "vitest run"
   },
   "devDependencies": {

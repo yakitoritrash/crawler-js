@@ -1,5 +1,13 @@
 import { JSDOM } from 'jsdom'
 
+export async function crawlPage(currentURL: string) {
+  console.log(`actively crawling: ${currentURL}`)
+
+  const resp = await fetch(currentURL);
+
+  console.log(await resp.text());
+}
+
 export function normalizeURL(urlString: string): string {
   const urlObj = new URL(urlString);
   const hostname = `${urlObj.hostname}${urlObj.pathname}`;
